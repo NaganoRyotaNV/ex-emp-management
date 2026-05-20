@@ -12,15 +12,26 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * administratorsテーブルを操作するrepository.
+ */
 @Repository
-
 public class AdministratorRepository {
+
+    /**
+     * テンプレートの定義
+     */
     @Autowired
     private NamedParameterJdbcTemplate template;
 
     private static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER =
             new BeanPropertyRowMapper<>(Administrator.class);
 
+    /**
+     * 管理者情報を新規登録します.
+     *
+     * @param administrator 登録する管理者情報
+     */
     public void insert(Administrator administrator) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
         String sql = """
@@ -28,6 +39,10 @@ public class AdministratorRepository {
                 """;
         template.update(sql, param);
     }
+
+    /**
+     * メールアドレスとパスワードをデータベースから抽出する処理
+     */
 
     public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
         System.out.println(mailAddress + ":" + password);

@@ -12,9 +12,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+/**
+ * employeesテーブルを操作するrepositoryです。
+ */
+
 @Repository
 
-
+/**
+ *　社員情報をdataベースと共有*/
 public class EmployeeRepository {
     @Autowired
     private NamedParameterJdbcTemplate template;
