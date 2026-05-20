@@ -28,5 +28,4 @@ public class Employee {
     private Integer salary;
     private String characteristics;
     private Integer dependentsCount;
-
 }
