@@ -1,6 +1,20 @@
 package com.example.domain;
 
+import lombok.*;
+
 import java.util.Date;
+
+/**
+ * Employeeドメインの定義.
+ * 従業員情報を示すドメインクラスemployeesテーブルに対応。
+ */
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
 
 public class Employee {
     private Integer id;
