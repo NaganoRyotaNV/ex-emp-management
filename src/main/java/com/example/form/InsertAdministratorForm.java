@@ -4,7 +4,7 @@ package com.example.form;
 import lombok.*;
 
 /**
- * 管理者を新規登録する際に使用するフォームです
+ * 管理者を新規登録する際に使用するフォームです.
  */
 
 @Getter
@@ -15,15 +15,15 @@ import lombok.*;
 
 public class InsertAdministratorForm {
     /**
-     * 名前
+     * 名前.
      */
     private String name;
     /**
-     * メールアドレス
+     * メールアドレス.
      */
     private String mailAddress;
     /**
-     * パスワード
+     * パスワード.
      */
     private String password;
 }

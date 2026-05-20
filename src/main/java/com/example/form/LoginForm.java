@@ -3,7 +3,7 @@ package com.example.form;
 import lombok.*;
 
 /**
- * ログイン時に送信される情報を格納するフォームです
+ * ログイン時に送信される情報を格納するフォームです.
  */
 
 @Getter
@@ -14,11 +14,11 @@ import lombok.*;
 
 public class LoginForm {
     /**
-     * メールアドレス
+     * メールアドレス.
      */
     private String mailAddress;
     /**
-     * パスワード
+     * パスワード.
      */
     private String password;
 }

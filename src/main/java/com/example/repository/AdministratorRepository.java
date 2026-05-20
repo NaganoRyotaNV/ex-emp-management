@@ -19,7 +19,7 @@ import java.util.List;
 public class AdministratorRepository {
 
     /**
-     * テンプレートの定義
+     * SQLを実行するためのテンプレートです.
      */
     @Autowired
     private NamedParameterJdbcTemplate template;
@@ -30,7 +30,7 @@ public class AdministratorRepository {
     /**
      * 管理者情報を新規登録します.
      *
-     * @param administrator 登録する管理者情報
+     * @param administrator 登録する管理者情報。
      */
     public void insert(Administrator administrator) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
@@ -41,9 +41,12 @@ public class AdministratorRepository {
     }
 
     /**
-     * メールアドレスとパスワードをデータベースから抽出する処理
+     * メールアドレスとパスワードに一致する管理者情報を取得します.
+     *
+     * @param mailAddress メールアドレス。
+     * @param password パスワード。
+     * @return 一致する管理者情報。存在しない場合はnull。
      */
-
     public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
         System.out.println(mailAddress + ":" + password);
         String sql = """

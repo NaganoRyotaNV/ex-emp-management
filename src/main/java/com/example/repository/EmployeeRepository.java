@@ -14,22 +14,26 @@ import java.util.List;
 
 
 /**
- * employeesテーブルを操作するrepositoryです。
+ * employeesテーブルを操作するrepositoryです.
  */
-
 @Repository
-
-/**
- *　社員情報をdataベースと共有*/
 public class EmployeeRepository {
+    /**
+     * SQLを実行するためのテンプレートです.
+     */
     @Autowired
     private NamedParameterJdbcTemplate template;
 
     private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = new BeanPropertyRowMapper<>(Employee.class);
 
-    public List<Employee> findALL() {
+    /**
+     * 全ての従業員情報を入社日の降順で取得します.
+     *
+     * @return 従業員情報のリスト。存在しない場合はnull。
+     */
+    public List<Employee> findAll() {
         String sql = """
-                SELECT id, name, image, gender, hire_date, mail_address, zip_code, telephone, salary, characteristics, dependents_count FROM employees 
+                SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees
                 ORDER BY hire_date DESC;
                 """;
         List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
@@ -41,9 +45,15 @@ public class EmployeeRepository {
         return employeeList;
     }
 
+    /**
+     * 指定されたIDに一致する従業員情報を取得します.
+     *
+     * @param id 従業員ID。
+     * @return 一致する従業員情報。
+     */
     public Employee findById(Integer id) {
         String sql = """
-                SELECT id, name, image, gender, hire_date, mail_address, zip_code, telephone, salary, characteristics, dependents_count FROM employees 
+                SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees
                 WHERE id = :id;
                 """;
 
@@ -54,12 +64,17 @@ public class EmployeeRepository {
         return employee;
     }
 
+    /**
+     * 従業員情報を更新します.
+     *
+     * @param employee 更新する従業員情報。
+     */
     public void update(Employee employee) {
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 
         String updateSql = """
-                UPFATE employees SET name = :name, image = :image, gender = :gender, hire_date = :hire_date, mail_address = :mail_address, zip_code = :zip_code, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependents_count WEHERE id = :id
+                UPDATE employees SET name = :name, image = :image, gender = :gender, hire_date = :hireDate, mail_address = :mailAddress, zip_code = :zipCode, address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependentsCount WHERE id = :id
                 """;
         template.update(updateSql, param);
     }

@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 管理者関連機能の処理の制御を行うコントローラ
+ * 管理者の登録・ログインに関するリクエストを処理するコントローラです.
  */
-
 @Controller
 @RequestMapping("/")
-
 public class AdministratorController {
     /**
-     * 管理者処理サービス
+     * 管理者情報の登録およびログイン処理を行うサービスです.
      */
     @Autowired
     private AdministratorService administratorService;
     /**
-     * セッション情報
+     * ログイン中の管理者情報を保持するセッションです.
      */
     @Autowired
     HttpSession session;
 
     /**
+     * 管理者登録画面を表示します.
      *
-     * 管理者登録画面へ遷移します。
+     * @param form 管理者登録フォーム。
+     * @return 管理者登録画面。
      */
     @GetMapping("/to-insert")
     public String toInsert(InsertAdministratorForm form) {
@@ -42,8 +42,10 @@ public class AdministratorController {
     }
 
     /**
+     * 入力された管理者情報を登録します.
      *
-     * 管理者情報を登録します。
+     * @param form 管理者登録フォーム。
+     * @return ログイン画面へリダイレクト。
      */
     @PostMapping("/insert")
     public String insert(InsertAdministratorForm form) {
@@ -54,7 +56,10 @@ public class AdministratorController {
     }
 
     /**
-     * ログイン画面に遷移します
+     * ログイン画面を表示します.
+     *
+     * @param form ログインフォーム。
+     * @return ログイン画面。
      */
     @GetMapping("/")
     public String toLogin(LoginForm form) {
@@ -62,7 +67,11 @@ public class AdministratorController {
     }
 
     /**
-     * ログイン処理を行います
+     * 入力されたメールアドレスとパスワードでログイン認証を行います.
+     *
+     * @param form ログインフォーム。
+     * @param model 画面に表示するメッセージを保持するモデル。
+     * @return 認証に成功した場合は従業員一覧画面へリダイレクト、失敗した場合はログイン画面。
      */
     @PostMapping("/login")
     public String login(LoginForm form, Model model) {
@@ -75,5 +84,17 @@ public class AdministratorController {
         }
         session.setAttribute("administratorName", administratorName);
         return "redirect:/employee/show-list";
+    }
+
+    /**
+     * ログアウト処理を行います.
+     *
+     * @param session 現在のセッション情報。
+     * @return ログイン画面へリダイレクト。
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 }

@@ -13,19 +13,19 @@ import lombok.*;
 @ToString
 public class Administrator {
     /**
-     * 主キー
+     * 主キー.
      */
     private Integer id;
     /**
-     * 管理者名
+     * 管理者名.
      */
     private String name;
     /**
-     * メールアドレス
+     * メールアドレス.
      */
     private String mailAddress;
     /**
-     * パスワード
+     * パスワード.
      */
     private String password;
 }
