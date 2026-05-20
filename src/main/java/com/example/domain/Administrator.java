@@ -18,5 +18,4 @@ public class Administrator {
     private String name;
     private String mailAddress;
     private String password;
-
 }
