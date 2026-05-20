@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.Administrator;
 import com.example.form.InsertAdministratorForm;
+import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class AdministratorController {
         BeanUtils.copyProperties(form, administrator);
         administratorService.insert(administrator);
         return "redirect:/";
+    }
+
+    @GetMapping("/")
+    public String toLogin(LoginForm form){
+        return "administrator/login";
     }
 }
